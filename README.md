@@ -14,7 +14,7 @@ api -> src -> config => app config handle </br>
 api -> src -> services => place for service layer (code merged in routes for time) </br>
 api -> src -> entity => Typeorm entity folder </br>
 
-* For Starting the app go to api folder </br>
+*For Starting the app go to api folder </br>
 npm i </br>
 npm run start:dev</br>
 
