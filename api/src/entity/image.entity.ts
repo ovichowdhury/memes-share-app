@@ -37,7 +37,9 @@ export class Image {
     
 
     // create date
-    @CreateDateColumn()
+    @CreateDateColumn({
+        type: "timestamptz"
+    })
     createDate: Date;
 
     /**

@@ -16,6 +16,7 @@ export async function deleteImage() {
         let end = moment(r.createDate); // create date
         let duration = moment.duration(now.diff(end));
         let mins = duration.asMinutes()
+        console.log(mins);
         if(mins >= r.deleteAfter) {
             await getManager().getRepository(Image).delete(r.id);
         }
