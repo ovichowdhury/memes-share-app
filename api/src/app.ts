@@ -10,6 +10,7 @@ import { createConnection } from "typeorm";
 // importing routers
 import userRouter from './routes/user.route';
 import imageRouter from './routes/image.route';
+import { deleteImage } from "./services/schedule-delete.service";
 
 
 createConnection().then(connention => {
@@ -65,6 +66,11 @@ createConnection().then(connention => {
         process.exit(1);
     });
 
+    // Schedule job for image delete
+    // efficient approach would be cronjob but using interval for lack of time
+    setInterval(async () => {
+        await deleteImage();
+    }, 2000);
 
     // port number
     const port: number = getPort();

@@ -165,8 +165,28 @@ router.get('/stat', [auth], wrap(async (req: Request, res: Response, next: NextF
  }));
 
 
+/**
+ * Image delete
+ */
 
-
+ router.delete('/image', [auth], wrap(async (req: Request, res: Response, next: NextFunction) => {
+    const image: Image | undefined = await getManager().getRepository(Image).findOne(req.body.id,{
+        relations: ["user"]
+    });
+    if(image && image.user.id === req.user.id) {
+       const result = await getManager().getRepository(Image).delete(image.id);
+       return res.status(200).json({
+           statusCode: 200,
+           message: "Delete Successful"
+       })
+    }
+    else {
+       return res.status(400).json({
+           statusCode: 400,
+           message: "Invalid Request"
+       })
+    }
+}));
 
 
 export default router;
